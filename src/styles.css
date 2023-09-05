@@ -1,0 +1,134 @@
+
+.page {
+    overflow-x: hidden;
+}
+
+.top-border {
+    background-color: darkorange;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    margin-top: 0px;
+    text-align: center;
+}
+
+.logo {
+    max-width: 500px;
+    max-height: 500px;
+    scale: 1.2;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+div > h5 {
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-left: 10px;
+    flex: 1;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.menu-container {
+    text-align: center;
+    background-color: orange;
+    display: block;
+    margin: 0 auto;  /* center ? */
+    width: calc(100% - 60px); /*This will give you the width of the page minus 30px on each side.*/
+    max-width: 800;
+    height: 1000px; 
+    margin-bottom: 300px;
+    border-radius: 10px;
+    padding-top: 100px;
+}
+
+.story-container {
+    background-color: orange;
+    display: block;
+    margin: 0 auto;  /* center ? */
+    width: calc(100% - 60px); /*This give a margin the width of the page minus 30px on each side.*/
+    height: 700px; /*  // Example height, adjust as necessary. */
+    margin-bottom: 300px;
+    border-radius: 10px;
+    padding-top: 10px;
+}
+
+.element-container {
+    background-color: orange;
+    display: block;
+    margin: 0 auto;  /* center ? */
+    width: calc(100% - 60px); /*This give a margin the width of the page minus 30px on each side.*/
+    height: 1000px; /*  // Example height, adjust as necessary. */
+    margin-bottom: 300px;
+    border-radius: 10px;
+    padding-top: 10px;
+}
+
+.story {
+    padding: 50px;
+    padding-top: 40px;
+}
+
+/*need to add queries for 1000px-700 for the aboust us section*/
+
+
+@media screen and (max-width: 750px) {
+    .menu-container {
+        height: 200px;
+    }
+
+}
+
+@media screen and (max-width: 750px) and (min-width: 725px){
+    .story-container {
+        height: 1100px;
+    }
+}   
+
+@media screen and (max-width: 725px) and (min-width: 660px){
+    .story-container {
+        height: 1200px;
+    }
+}
+
+@media screen and (max-width: 660px) and (min-width: 630px) {
+    .story-container {
+        height: 1300px;
+    }
+}
+
+@media screen and (max-width:630px) and (min-width: 600px){
+    .story-container{
+        height: 1400px;
+    }
+}
+
+@media screen and (max-width: 600px) and (min-width: 565px){
+    .story-container{
+        height: 1500px;
+    }
+}
+
+@media screen and (max-width: 565px) and (min-width: 542px){
+    .story-container{
+        height: 1600px;
+    }
+}
+
+@media screen and (max-width: 542px) and (min-width: 518px){
+    .story-container{
+        height: 1700px;
+    }
+}
+
+@media screen and (max-width: 518px){
+    .story-container{
+        height: 1800px;
+    }
+}

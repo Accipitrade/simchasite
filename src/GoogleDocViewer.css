@@ -1,0 +1,39 @@
+.iframe-container {
+    position: relative;
+    top: -10px;
+    width: 100%;
+    padding-top: 400px;
+    padding-bottom: 56.25%; /* This value is for 16:9 aspect ratio. Adjust as needed. */
+    overflow: hidden;
+  }
+  
+  .iframe-container iframe {
+    display: block;
+    position: absolute;
+    top: -150px; /* This hides the banner */
+    left: -3vh;
+    width: 105%;
+    height: calc(100% + 300px); /* Counteract the top offset */
+  }
+
+  .mobile-view {
+    position:absolute;
+    display: none;
+    text-align: center;   
+    width: 100%;
+    left: 0px;
+    top: 98px;
+    font-style: bolder;
+    text-decoration: underline;
+
+  }
+  
+  @media screen and (max-width: 750px) {
+    .iframe-container iframe {
+        display: none;
+    }
+
+    .mobile-view {
+        display: block;
+    }
+}

@@ -19,22 +19,10 @@ const useWindowSize = () => {
 const BackgroundVideo = () => {
     const [width] = useWindowSize();
     const videoRef = useRef(null);
-    const [scrollPosition, setScrollPosition] = useState(0);
     const framesPerSecond = 30; // Specify the frame rate of your video
+    const requestRef = useRef();
 
-    const updateScrollPosition = () => {
-        const newPosition = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-        setScrollPosition(newPosition);
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', updateScrollPosition);
-        return () => {
-            window.removeEventListener('scroll', updateScrollPosition);
-        };
-    }, []);
-
-    useEffect(() => {
+    const updateVideoFrame = (scrollPosition) => {
         const video = videoRef.current;
         if (video) {
             const totalFrames = video.duration * framesPerSecond;
@@ -43,7 +31,25 @@ const BackgroundVideo = () => {
 
             video.currentTime = Number.isFinite(targetTime) ? targetTime : video.currentTime;
         }
-    }, [scrollPosition]);
+    };
+
+    const handleScroll = () => {
+        const newPosition = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        updateVideoFrame(newPosition);
+    };
+
+    useEffect(() => {
+        const handleAnimationFrame = () => {
+            handleScroll();
+            requestRef.current = requestAnimationFrame(handleAnimationFrame);
+        };
+
+        requestRef.current = requestAnimationFrame(handleAnimationFrame);
+
+        return () => {
+            cancelAnimationFrame(requestRef.current);
+        };
+    }, []);
 
     return (
         <video

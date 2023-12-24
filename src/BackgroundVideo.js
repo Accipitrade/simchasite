@@ -19,54 +19,31 @@ const useWindowSize = () => {
 const BackgroundVideo = () => {
     const [width] = useWindowSize();
     const videoRef = useRef(null);
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const framesPerSecond = 30; // Specify the frame rate of your video
 
-    let frameId = null;
-    const framesPerSecond = 30;  // Specify the frame rate of your video
-    const smoothness = 5;  // Adjusted smoothness factor
+    const updateScrollPosition = () => {
+        const newPosition = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        setScrollPosition(newPosition);
+    };
 
-    const handleScroll = () => {
+    useEffect(() => {
+        window.addEventListener('scroll', updateScrollPosition);
+        return () => {
+            window.removeEventListener('scroll', updateScrollPosition);
+        };
+    }, []);
+
+    useEffect(() => {
         const video = videoRef.current;
         if (video) {
             const totalFrames = video.duration * framesPerSecond;
-            const fraction = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            const targetFrame = Math.round(totalFrames * fraction);
+            const targetFrame = Math.round(totalFrames * scrollPosition);
             const targetTime = targetFrame / framesPerSecond;
 
             video.currentTime = Number.isFinite(targetTime) ? targetTime : video.currentTime;
         }
-    };
-
-    const smoothVideoPlayback = () => {
-        const video = videoRef.current;
-        if (video) {
-            const totalFrames = video.duration * framesPerSecond;
-            const fraction = video.currentTime / video.duration;
-            const currentFrame = Math.round(totalFrames * fraction);
-            const targetFraction = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            const targetFrame = Math.round(totalFrames * targetFraction);
-            const frameDifference = targetFrame - currentFrame;
-
-            if (Math.abs(frameDifference) > 1) {
-                const timeStep = smoothness * frameDifference / framesPerSecond;
-                video.currentTime += timeStep;
-            }
-
-            frameId = requestAnimationFrame(smoothVideoPlayback);
-        }
-    };
-
-    useEffect(() => {
-        const video = videoRef.current;
-        if (!video) return;
-
-        window.addEventListener('scroll', handleScroll);
-        frameId = requestAnimationFrame(smoothVideoPlayback);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            cancelAnimationFrame(frameId);
-        };
-    }, []);
+    }, [scrollPosition]);
 
     return (
         <video
@@ -85,6 +62,6 @@ const BackgroundVideo = () => {
             loop
         />
     );
-}
+};
 
 export default BackgroundVideo;

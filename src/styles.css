@@ -10,6 +10,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    animation: fade-in 2s ease-in forwards;
 }
 
 .title {
@@ -74,6 +75,27 @@ div > h5 {
     padding: 50px;
     padding-top: 40px;
 }
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.opener {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Full viewport height */
+    text-align: center; /* Center the text horizontally */
+    padding-bottom: 50px; /* Adjust as needed for spacing from bottom */
+  }
+  
+  .bottom-button {
+    margin-top: auto; /* Pushes the button to the bottom */
+    margin-bottom: 50px; /*MEDIA QUERY */
+    align-self: center; /* Center button horizontally */
+  }
 
 /*need to add queries for 1000px-700 for the aboust us section*/
 

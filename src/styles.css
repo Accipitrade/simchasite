@@ -88,12 +88,12 @@ div > h5 {
     align-items: center;
     height: 80vh; /* Full viewport height */
     text-align: center; /* Center the text horizontally */
-    padding-bottom: 50px; /* Adjust as needed for spacing from bottom */
+    padding-top: 100px; /*maybe also a media query */
   }
   
   .bottom-button {
     margin-top: auto; /* Pushes the button to the bottom */
-    margin-bottom: 50px; /*MEDIA QUERY */
+    margin-bottom: 200px; /*MEDIA QUERY */
     align-self: center; /* Center button horizontally */
   }
 

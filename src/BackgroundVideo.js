@@ -29,10 +29,10 @@ const BackgroundVideo = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', updateScrollPosition, { passive: true });
-        window.addEventListener('touchmove', updateScrollPosition, { passive: true });
+        window.addEventListener('gesturchange', updateScrollPosition, { passive: true });
         return () => {
             window.removeEventListener('scroll', updateScrollPosition);
-            window.addEventListener('touchmove', updateScrollPosition, { passive: true });
+            window.addEventListener('gesturchange', updateScrollPosition, { passive: true });
         };
     }, []);
 

@@ -1,6 +1,7 @@
 
 .page {
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .top-border {
@@ -36,12 +37,18 @@ div > h5 {
     text-decoration: underline;
 }
 
+h5 {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
 .menu-container {
     text-align: center;
     background-color: orange;
     display: block;
     margin: 0 auto;  /* center ? */
-    width: calc(100% - 60px); /*This will give you the width of the page minus 30px on each side.*/
+    width: 80vw; /*This will give you the width of the page minus 30px on each side.*/
     max-width: 800;
     height: 1000px; 
     margin-bottom: 300px;
@@ -71,6 +78,18 @@ div > h5 {
     padding-top: 10px;
 }
 
+.messages-container {
+    background-color: rgba(245, 245, 245, 0.2);
+    display: block;
+    margin: 0 auto;  /* center ? */
+    width: calc(100% - 60px); /*This give a margin the width of the page minus 30px on each side.*/
+    height: 500px; /*  // Example height, adjust as necessary. */
+    margin-top: 80px;
+    margin-bottom: 300px;
+    border-radius: 10px;
+    padding-top: 0px;
+}
+
 .story {
     padding: 50px;
     padding-top: 40px;
@@ -88,13 +107,15 @@ div > h5 {
     align-items: center;
     height: 80vh; /* Full viewport height */
     text-align: center; /* Center the text horizontally */
-    padding-top: 100px; /*maybe also a media query */
+    padding-top: 10px; /*maybe also a media query */
   }
   
   .bottom-button {
     margin-top: auto; /* Pushes the button to the bottom */
-    margin-bottom: 200px; /*MEDIA QUERY */
+    margin-top: 50px;
     align-self: center; /* Center button horizontally */
+    border: none;
+    background: none;
   }
 
 /*need to add queries for 1000px-700 for the aboust us section*/

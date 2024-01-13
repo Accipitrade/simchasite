@@ -29,7 +29,7 @@ const GoogleDocViewer = () => {
         <option value="brunch">Brunch Menu</option>
       </select>
 
-      <button>Click here to order online!</button>
+      <button style={{marginLeft:'70px'}}>Click here to order online!</button>
 
       <div className='iframe-container'>
         <iframe src={documentURL} 

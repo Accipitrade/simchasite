@@ -21,7 +21,7 @@ const Gallery = () => {
 
       return(
         <div>
-            <ImageGallery items={images} showNav={false} showFullscreenButton={false} showBullets={false} showThumbnails={false} showPlayButton={false} />
+            <ImageGallery items={images} showFullscreenButton={false} showBullets={false} showThumbnails={false} showPlayButton={false} />
         </div>
       )
 

@@ -70,7 +70,7 @@ const App = () => {
         </Container>
       </Parallax>
       
-      <Parallax speed={15} opacity={[3.8, 0]}>
+      <Parallax speed={15} opacity={[3.5, 0]}>
         <div style={{paddingTop:'500px'}} />
         <Container backgroundColor='orange'>
           <div>
@@ -82,7 +82,7 @@ const App = () => {
       <Parallax speed={15} opacity={[3.8, 0]}>
         <div style={{paddingTop:'300px', marginBottom:'50vh'}} />
         <Container backgroundColor='orange'>
-          <div>
+          <div style={{textAlign:'center'}}>
             <h3>Hungry for more? Place a reservation!</h3>
             <button>Reserve a Table</button>
             <h3>Follow us on our Social Media:</h3>

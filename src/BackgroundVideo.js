@@ -21,20 +21,36 @@ const BackgroundVideo = () => {
     const videoRef = useRef(null);
     const [scrollPosition, setScrollPosition] = useState(0);
     const framesPerSecond = 30; // Specify the frame rate of your video
+    const isMobile = width <= 768; // Adjust this value based on your needs
 
     const updateScrollPosition = () => {
         const newPosition = window.scrollY / (document.body.scrollHeight - window.innerHeight);
         setScrollPosition(newPosition);
     };
 
+    const handleTouchMove = (e) => {
+        // Calculate scroll position based on touch position
+        const touchPosY = e.touches[0].clientY;
+        const newPosition = touchPosY / (document.body.scrollHeight - window.innerHeight);
+        setScrollPosition(newPosition);
+    };
+
     useEffect(() => {
-        window.addEventListener('scroll', updateScrollPosition, { passive: true });
-        window.addEventListener('gesturchange', updateScrollPosition, { passive: true });
+        if (isMobile) {
+            // Listen for touch move events on mobile
+            window.addEventListener('touchmove', handleTouchMove, { passive: true });
+        } else {
+            // Listen for scroll events on desktop
+            window.addEventListener('scroll', updateScrollPosition, { passive: true });
+        }
         return () => {
-            window.removeEventListener('scroll', updateScrollPosition);
-            window.addEventListener('gesturchange', updateScrollPosition, { passive: true });
+            if (isMobile) {
+                window.removeEventListener('touchmove', handleTouchMove);
+            } else {
+                window.removeEventListener('scroll', updateScrollPosition);
+            }
         };
-    }, []);
+    }, [isMobile]);
 
     useEffect(() => {
         const video = videoRef.current;

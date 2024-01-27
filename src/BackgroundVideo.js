@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import desktopVideo from './simchafire.mp4';
-import mobileVideo from './simchafire.mp4';
+import picture from './simchafire.PNG';
+import video from './simchafire.mp4';
 import './BackgroundVideo.css';
 
 const useWindowSize = () => {
@@ -17,11 +17,16 @@ const useWindowSize = () => {
 };
 
 const BackgroundVideo = () => {
+    const [videoLoaded, setVideoLoaded] = useState(false);
     const [width] = useWindowSize();
     const videoRef = useRef(null);
     const [scrollPosition, setScrollPosition] = useState(0);
     const framesPerSecond = 30; // Specify the frame rate of your video
     const isMobile = width <= 768; // Adjust this value based on your needs
+
+    const onVideoLoad = () => {
+        setVideoLoaded(true); // Update state when video is loaded
+    };
 
     const updateScrollPosition = () => {
         const newPosition = window.scrollY / (document.body.scrollHeight - window.innerHeight);
@@ -64,7 +69,36 @@ const BackgroundVideo = () => {
     }, [scrollPosition]);
 
     return (
-        <video
+
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1 }}>
+            {!videoLoaded && (
+                <img
+                    src={picture}
+                    alt="background"
+                    style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                    }}
+                />
+            )}
+            <video
+                ref={videoRef}
+                style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: videoLoaded ? 'block' : 'none' // Hide video until loaded
+                }}
+                src={video}
+                muted
+                loop
+                onLoadedData={onVideoLoad} // Event handler for when video data is loaded
+            />
+
+            {/* <video
             ref={videoRef}
             style={{
                 position: 'fixed',
@@ -75,10 +109,14 @@ const BackgroundVideo = () => {
                 objectFit: 'cover',
                 zIndex: -1
             }}
-            src={width <= 768 ? mobileVideo : desktopVideo}
+            src={video}
             muted
             loop
-        />
+        /> */}
+        </div>
+
+        
+        
     );
 };
 

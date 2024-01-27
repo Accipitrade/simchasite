@@ -16,6 +16,21 @@ const App = () => {
     height: window.innerHeight
   });
 
+  const [menuType, setMenuType] = useState('dinner');
+
+  const handleMenuChange = (event) => {
+    setMenuType(event.target.value);
+  };
+
+  const menus = {
+    dinner: 'https://docs.google.com/document/d/e/2PACX-1vS7R1U6PjnfqWgrX-Q2kIAOdOcBwotfSqlXhq66sbmScpAOsojROc-hVDF_Rcblpkrparb88FWXyfpV/pub',
+    brunch: '', // Your brunch menu URL
+    tt: '', // Taco Tuesday URL
+    kid: '',
+  };
+
+  const documentURL = menus[menuType] || '';
+
   useEffect(() => {
     /*
           fetch("/.netlify/functions/googleApiProxy")
@@ -55,18 +70,28 @@ const App = () => {
 
       <Parallax translateY={[0, -10]}>
         <Container backgroundColor='glass'>
-          <h1 style={{ color: 'white', fontSize: '60px' }}>Welcome</h1>
+          <h1 style={{ color: 'black', fontSize: '60px' }}>Welcome</h1>
           {/* this needs to contact backend in order to get message to display */}
-          <h2 style={{ color: 'white', fontSize: '30px', textAlign: 'center' }}>Simcha is open Tuesday - Saturday 4pm - 10pm, Sunday 10am - 2pm.</h2>
+          <h2 style={{ color: 'black', fontSize: '30px', textAlign: 'center' }}>Simcha is open Tuesday - Saturday 4pm - 10pm, Sunday 10am - 2pm.</h2>
           <button className='bottom-button'>
-            <div style={{ color: 'white', fontSize: '50px' }}>↓</div> {/* Replace with an appropriate arrow icon */}
+            <div style={{ color: 'black', fontSize: '50px' }}>↓</div> {/* Replace with an appropriate arrow icon */}
           </button>
         </Container>
       </Parallax>
 
       <Parallax speed={15} opacity={[2.5, 0]} translateY={[60, 0]}>
         <Container backgroundColor='orange'>
-            <GoogleDocViewer />
+
+      <select value={menuType} onChange={handleMenuChange} className="menu-select" style={{marginBottom:"50px", alignSelf:"center"}} >
+        <option value="dinner">Dinner Menu</option>
+        <option value="brunch">Brunch Menu</option>
+        <option value="drink">Drink Menu</option>
+        <option value="tt">Taco Tuesday</option>
+        <option value="kid">Kid's Menu</option>
+      </select>
+
+      <button style={{marginBottom:"50px", alignSelf:"center"}}>Click here to order online!</button>
+            <GoogleDocViewer documentURL={documentURL} />
         </Container>
       </Parallax>
       

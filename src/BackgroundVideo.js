@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import picture from './simchafire.PNG';
+import picture from './simchafire.jpg';
 import video from './simchafire.mp4';
 import './BackgroundVideo.css';
 
@@ -18,14 +18,17 @@ const useWindowSize = () => {
 
 const BackgroundVideo = () => {
     const [videoLoaded, setVideoLoaded] = useState(false);
+    const [imageVisible, setImageVisible] = useState(true); // New state to control image visibility
     const [width] = useWindowSize();
     const videoRef = useRef(null);
     const [scrollPosition, setScrollPosition] = useState(0);
-    const framesPerSecond = 30; // Specify the frame rate of your video
-    const isMobile = width <= 768; // Adjust this value based on your needs
+    const framesPerSecond = 30;
+    const isMobile = width <= 768;
 
     const onVideoLoad = () => {
-        setVideoLoaded(true); // Update state when video is loaded
+        setVideoLoaded(true);
+        // Hide image after video loads and intro animation ends
+        setTimeout(() => setImageVisible(false), 2000); // Assuming 2s is the animation duration
     };
 
     const updateScrollPosition = () => {
@@ -34,7 +37,6 @@ const BackgroundVideo = () => {
     };
 
     const handleTouchMove = (e) => {
-        // Calculate scroll position based on touch position
         const touchPosY = e.touches[0].clientY;
         const newPosition = touchPosY / (document.body.scrollHeight - window.innerHeight);
         setScrollPosition(newPosition);
@@ -42,10 +44,8 @@ const BackgroundVideo = () => {
 
     useEffect(() => {
         if (isMobile) {
-            // Listen for touch move events on mobile
             window.addEventListener('touchmove', handleTouchMove, { passive: true });
         } else {
-            // Listen for scroll events on desktop
             window.addEventListener('scroll', updateScrollPosition, { passive: true });
         }
         return () => {
@@ -69,12 +69,12 @@ const BackgroundVideo = () => {
     }, [scrollPosition]);
 
     return (
-
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1 }}>
-            {!videoLoaded && (
+            {imageVisible && (
                 <img
                     src={picture}
                     alt="background"
+                    className="intro-animation" // Apply CSS animation
                     style={{
                         position: 'absolute',
                         width: '100%',
@@ -90,33 +90,14 @@ const BackgroundVideo = () => {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    display: videoLoaded ? 'block' : 'none' // Hide video until loaded
+                    display: videoLoaded && !imageVisible ? 'block' : 'none'
                 }}
                 src={video}
                 muted
                 loop
-                onLoadedData={onVideoLoad} // Event handler for when video data is loaded
+                onLoadedData={onVideoLoad}
             />
-
-            {/* <video
-            ref={videoRef}
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100vw',
-                height: '100vh',
-                objectFit: 'cover',
-                zIndex: -1
-            }}
-            src={video}
-            muted
-            loop
-        /> */}
         </div>
-
-        
-        
     );
 };
 

@@ -3,6 +3,6 @@
     to { opacity: 1; }
 }
 
-video {
+.intro-animation {
     animation: fade-in 2s ease-in forwards;
 }

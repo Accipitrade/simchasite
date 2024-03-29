@@ -23,7 +23,7 @@ const App = () => {
   };
 
   const menus = {
-    dinner: 'https://docs.google.com/document/d/e/2PACX-1vS7R1U6PjnfqWgrX-Q2kIAOdOcBwotfSqlXhq66sbmScpAOsojROc-hVDF_Rcblpkrparb88FWXyfpV/pub',
+    dinner: 'https://docs.google.com/document/d/e/2PACX-1vRCV6KHuU5op_3bWmE9bgi5gFp-3WMAqNomPmGE9dN8ay6FvlxggoD9T9bpEjmplfsPedLAL7J7ZsC1/pub',
     brunch: '', // Your brunch menu URL
     tt: '', // Taco Tuesday URL
     kid: '',

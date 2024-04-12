@@ -13,7 +13,7 @@ root.render(
       <ParallaxProvider>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/second" element={<Story />} />
+          <Route path="/aboutus" element={<Story />} />
         </Routes>
       </ParallaxProvider>
     </BrowserRouter>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Parallax } from 'react-scroll-parallax';
+import { Link } from 'react-router-dom'
 import BackgroundVideo from './BackgroundVideo.js';
 import logo from './logo.png'
 import './styles.css'
@@ -76,7 +77,7 @@ const App = () => {
         <img className='logo' src={logo} />
         <div style={{ display: 'flex', flexDirection: 'row', width: '100%', marginTop: '20px', justifyContent: 'space-between' }}>
           <h5>Menu</h5>
-          <h5>Our Story</h5>
+          <h5><Link to='/aboutus'>About Us</Link></h5>
           <h5>Order Online</h5>
           <h5>Reserve a Table</h5>
         </div>

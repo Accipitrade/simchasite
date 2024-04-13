@@ -1,22 +1,40 @@
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import one from './1.jpg';
+import two from './2.jpg';
+import three from './3.jpg';
+import four from './4.jpg';
+import five from './5.jpg';
+import six from './6.jpg';
 
 
 const Gallery = () => {
 
     const images = [
         {
-          original: "https://picsum.photos/id/1018/1000/600/",
-          thumbnail: "https://picsum.photos/id/1018/250/150/",
+          original: one,
+          thumbnail: one
         },
         {
-          original: "https://picsum.photos/id/1015/1000/600/",
-          thumbnail: "https://picsum.photos/id/1015/250/150/",
+          original: two,
+          thumbnail: two
         },
         {
-          original: "https://picsum.photos/id/1019/1000/600/",
-          thumbnail: "https://picsum.photos/id/1019/250/150/",
+          original: three,
+          thumbnail: three
         },
+        {
+          original: four,
+          thumbnail: four
+        },
+        {
+          original: five,
+          thumbnail: five
+        },
+        {
+          original: six,
+          thumbnail: six
+        }
       ];
 
       return(

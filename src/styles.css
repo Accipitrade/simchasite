@@ -119,7 +119,10 @@ h5 {
   }
 
 /*need to add queries for 1000px-700 for the aboust us section*/
+.popup {
 
+    margin-top: -50vh;
+}
 
 @media screen and (max-width: 750px) {
     .menu-container {

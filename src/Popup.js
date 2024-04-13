@@ -4,16 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Overlay = styled(motion.div)`
   position: fixed;
-  top: -3;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  align-items: start; /* Align to the top */
-  padding-top: 50%;
-
+  align-items: center; /* Updated to center vertically */
   z-index: 10;
 `;
 
@@ -22,14 +20,18 @@ const PopupContainer = styled(motion.div)`
   border-radius: 10px;
   position: relative;
   max-width: 50%;
+  width: auto; /* Add a specific width if necessary */
   max-height: 75%;
+  height: auto; /* Add a specific height if necessary */
   padding: 20px;
   overflow-y: auto;
   
   display: flex;
-  flex-direction: column; /* Make it column to prevent stretch */
+  flex-direction: column;
   text-align: left;
   align-items: start;
+  
+  transform: translateY(-50%); /* Added for better vertical centering */
 
   h2, h4 {
     font-family: sans-serif;
@@ -47,9 +49,8 @@ const PopupContainer = styled(motion.div)`
     }
     
     h2, p, li {
-      text-align: center; /* Center align the text when the image is not displayed. */
+      text-align: center;
     }
-
   }
 `;
 

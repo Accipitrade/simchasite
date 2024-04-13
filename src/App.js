@@ -132,9 +132,9 @@ const App = () => {
             <button>IG</button>
             <button>FB</button>
             <h3>Or submit an inquiry below:</h3>
-            <input type='text'></input>
-            <input type='text'></input>
-            <input type='text'></input>
+            <input type='text' placeholder='Name'></input>
+            <input type='text' placeholder='Contact Email'></input>
+            <input type='text' placeholder='Message'></input>
             <button>Submit</button>
           </div>
         </Container>

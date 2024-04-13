@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import { Link } from 'react-router-dom'
+import scrollTo from 'animated-scroll-to';
 import BackgroundVideo from './BackgroundVideo.js';
 import logo from './logo.png'
 import './styles.css'
@@ -12,6 +13,8 @@ import Popup from './Popup.js';
 
 
 const App = () => {
+
+  const menuRef = useRef(null);
 
   const [size, setSize] = useState({
     width: window.innerWidth,
@@ -62,6 +65,17 @@ const App = () => {
     };
   }, []);
 
+  const openInNewTab = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  //vertical offset may need to change depending on screen size
+  const handleMenuClick = () => {
+    if (menuRef.current) {
+        scrollTo(menuRef.current, { speed:800, verticalOffset:-350, maxDuration: 450 });
+    }
+};
+
   return (
     <div className='page'>
 
@@ -76,10 +90,21 @@ const App = () => {
       <div className='top-border'>
         <img className='logo' src={logo} />
         <div style={{ display: 'flex', flexDirection: 'row', width: '100%', marginTop: '20px', justifyContent: 'space-between' }}>
-          <h5>Menu</h5>
+        <h5 onClick={handleMenuClick} style={{ cursor: 'pointer' }}>Menu</h5>
           <h5><Link to='/aboutus'>About Us</Link></h5>
-          <h5>Order Online</h5>
-          <h5>Reserve a Table</h5>
+          <h5>
+            <a href="https://www.foodbooking.com/ordering/restaurant/menu?restaurant_uid=26f53f2a-8d84-469d-9df9-1760d0d64bd4" target='_blank'>
+              Order Online
+            </a>
+          </h5>
+
+          <h5>
+            <a href="https://www.foodbooking.com/ordering/restaurant/menu/reservation?restaurant_uid=26f53f2a-8d84-469d-9df9-1760d0d64bd4&reservation=true" target='_blank'>
+              Reserve a Table
+            </a>
+          </h5>
+
+
         </div>
       </div>
 
@@ -97,17 +122,19 @@ const App = () => {
       </Parallax>
 
       <Parallax speed={15} opacity={[2.5, 0]} translateY={[60, 0]}>
-        <Container backgroundColor='orange'>
+        <Container backgroundColor='orange' id = 'menu'>
 
-          <select value={menuType} onChange={handleMenuChange} className="menu-select" style={{ marginBottom: "50px", alignSelf: "center" }} >
-            <option value="dinner">Dinner Menu</option>
-            <option value="brunch">Brunch Menu</option>
-            <option value="drink">Drink Menu</option>
-            <option value="tt">Taco Tuesday</option>
-            <option value="kid">Kid's Menu</option>
-          </select>
+        <div ref={menuRef}>
+    <select value={menuType} onChange={handleMenuChange} className="menu-select" style={{ marginBottom: "50px", alignSelf: "center" }}>
+        <option value="dinner">Dinner Menu</option>
+        <option value="brunch">Brunch Menu</option>
+        <option value="drink">Drink Menu</option>
+        <option value="tt">Taco Tuesday</option>
+        <option value="kid">Kid's Menu</option>
+    </select>
+</div>
 
-          <button style={{ marginBottom: "50px", alignSelf: "center" }}>Click here to order online!</button>
+          <button onClick={() => openInNewTab('https://www.foodbooking.com/ordering/restaurant/menu?restaurant_uid=26f53f2a-8d84-469d-9df9-1760d0d64bd4')} style={{ marginBottom: "50px", alignSelf: "center" }}>Click here to order online!</button>
           <GoogleDocViewer documentURL={documentURL} />
         </Container>
       </Parallax>

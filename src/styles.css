@@ -109,6 +109,10 @@ h5 {
     text-align: center; /* Center the text horizontally */
     padding-top: 10px; /*maybe also a media query */
   }
+
+  .page-content {
+    padding-bottom: 50px; /* Adjust this value as needed */
+  }
   
   .bottom-button {
     margin-top: auto; /* Pushes the button to the bottom */

@@ -10,15 +10,15 @@ const Story = () => {
             <div className='top-border'>
                 <img className='logo' src={logo} alt="Logo" />
                 <div style={{ display: 'flex', flexDirection: 'row', width: '100%', marginTop: '20px', justifyContent: 'space-between' }}>
-                    <h5><Link to='/'>Home</Link></h5>
+                    <h5><Link to='/' className='navbar-link' >Home</Link></h5>
                     <h5>
-                        <a href="https://www.foodbooking.com/ordering/restaurant/menu?restaurant_uid=26f53f2a-8d84-469d-9df9-1760d0d64bd4">
+                        <a className='navbar-link' href="https://www.foodbooking.com/ordering/restaurant/menu?restaurant_uid=26f53f2a-8d84-469d-9df9-1760d0d64bd4">
                             Order Online
                         </a>
                     </h5>
 
                     <h5>
-                        <a href="https://www.foodbooking.com/ordering/restaurant/menu/reservation?restaurant_uid=26f53f2a-8d84-469d-9df9-1760d0d64bd4&reservation=true" target='_blank'>
+                        <a className='navbar-link' href="https://www.foodbooking.com/ordering/restaurant/menu/reservation?restaurant_uid=26f53f2a-8d84-469d-9df9-1760d0d64bd4&reservation=true" target='_blank'>
                             Reserve a Table
                         </a>
                     </h5>

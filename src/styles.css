@@ -14,6 +14,10 @@
     animation: fade-in 2s ease-in forwards;
 }
 
+.navbar-link, .navbar-link:visited {
+    color: black; /* or any color you prefer */
+}
+
 .title {
     margin-top: 0px;
     text-align: center;

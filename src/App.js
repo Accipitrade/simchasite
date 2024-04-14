@@ -167,6 +167,7 @@ const App = () => {
             <input type='text' placeholder='Contact Email'></input>
             <input type='text' placeholder='Message'></input>
             <button>Submit</button>
+            <h5 style={{marginTop: '25px', textDecoration: 'none'}}>A website by <a href='https://www.joshslavin.com/' target='_blank'>Josh Slavin</a></h5>
           </div>
         </Container>
       </Parallax>

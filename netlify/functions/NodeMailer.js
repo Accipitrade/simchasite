@@ -8,7 +8,7 @@ export const handler = async (event) => {
     const { email, name, message } = JSON.parse(event.body);
 
     // Configure the transporter using modern JavaScript features
-    var transporter = nodemailer.createTransport("SMTP", {
+    var transporter = nodemailer.createTransport({
         service: "hotmail",
         auth: {
             user: process.env.OUTLOOK_EMAIL,

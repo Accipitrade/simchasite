@@ -18,7 +18,7 @@ export const handler = async (event) => {
 
     const mailOptions = {
         from: process.env.OUTLOOK_EMAIL, // Sender address
-        to: 'joshslavin98@gmail.com', // Recipient address
+        to: process.env.EMAIL_RECIPIENT, // Recipient address
         subject: `New Simcha Inquiry from ${email}`, // Subject line
         text: `${name}\n${message}`, // Plain text body
         html: `<p><strong>${name}</strong><br>${message}</p>` // HTML body content

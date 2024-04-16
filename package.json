@@ -9,6 +9,7 @@
     "animated-scroll-to": "^2.3.0",
     "axios": "^1.5.0",
     "framer-motion": "^11.0.24",
+    "nodemailer": "^6.9.13",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-calendar": "^4.6.0",

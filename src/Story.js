@@ -26,7 +26,7 @@ const Story = () => {
             </div>
 
             <div className='page-content' style={{ minHeight: '100vh', position: 'relative', marginTop: '-40px', paddingTop: '50px' }}>
-                <img src={stone} style={{ height: '100%', width: '100%', position: 'absolute', top: '0', left: '0', zIndex: '-1' }} alt="Background" />
+                <img src={stone} style={{ height: '100%', width: 'auto', position: 'absolute', top: '0', left: '0', zIndex: '-1' }} alt="Background" />
 
                 <Container backgroundColor="glass" style={{ position: 'relative', zIndex: '5', marginTop: '50px' }}>
                     <h3>

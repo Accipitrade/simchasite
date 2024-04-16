@@ -45,14 +45,67 @@ const App = () => {
 
   const documentURL = menus[menuType] || '';
 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [formErrors, setFormErrors] = useState({});
+
+  // Update form data state
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Validate form
+    const errors = validate(formData);
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      try {
+        // Assuming your Netlify function is set up at this endpoint
+        const response = await axios.post('/.netlify/functions/NodeMailer', formData);
+        console.log('Server Response:', response.data);
+
+        // Reset form fields after successful form submission
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+      } catch (error) {
+        console.error('Failed to send message:', error);
+      }
+    }
+  };
+
+  // Validate the form data
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.name) {
+      errors.name = "Name is required";
+    }
+    if (!values.email) {
+      errors.email = "Email is required";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format";
+    }
+    if (!values.message) {
+      errors.message = "Message is required";
+    }
+    return errors;
+  };
+
   useEffect(() => {
-    /*
-          fetch("/.netlify/functions/googleApiProxy")
-      .then(response => response.json())
-      .then(data => {
-        // put data into array here
-      });
-    */
+
     const handleResize = () => {
       setSize({
         width: window.innerWidth,
@@ -163,10 +216,38 @@ const App = () => {
             <img onClick={() => openInNewTab('https://www.instagram.com/simcharestaurant/')} src={IgLogo} style={{maxWidth:'80px', marginRight: "5px"}} />
             <img onClick={() => openInNewTab('https://www.facebook.com/simchaboston/')} src={FbLogo} style={{maxWidth:'80px',  marginLeft: "5px"}} />
             <h3>Or submit an inquiry below:</h3>
-            <input type='text' placeholder='Name'></input>
-            <input type='text' placeholder='Contact Email'></input>
-            <input type='text' placeholder='Message'></input>
-            <button>Submit</button>
+            <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        
+
+        <input
+          type="text"
+          name="email"
+          placeholder="Contact Email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        
+
+        <input
+          type="text"
+          name="message"
+          placeholder="Message"
+          value={formData.message}
+          onChange={handleChange}
+        />
+        {formErrors.name && <p>{formErrors.name}</p>}
+        {formErrors.email && <p>{formErrors.email}</p>}
+        {formErrors.message && <p>{formErrors.message}</p>}
+
+        <button type="submit">Submit</button>
+      </form>
             <h5 style={{marginTop: '25px', textDecoration: 'none'}}>A website by <a href='https://www.joshslavin.com/' target='_blank'>Josh Slavin</a></h5>
           </div>
         </Container>

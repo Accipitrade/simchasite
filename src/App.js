@@ -24,6 +24,8 @@ const App = () => {
     height: window.innerHeight
   });
 
+  const [popupMessage, setPopupMessage] = useState(process.env.POPUP_MESSAGE)
+
   const [isOpen, setIsOpen] = useState(true); //used for controlling pop up
 
   const [menuType, setMenuType] = useState('dinner');
@@ -37,10 +39,10 @@ const App = () => {
   }
 
   const menus = {
-    dinner: 'https://docs.google.com/document/d/e/2PACX-1vRCV6KHuU5op_3bWmE9bgi5gFp-3WMAqNomPmGE9dN8ay6FvlxggoD9T9bpEjmplfsPedLAL7J7ZsC1/pub',
-    brunch: '', // Your brunch menu URL
-    tt: '', // Taco Tuesday URL
-    kid: '',
+    dinner: process.env.DINNER_MENU,
+    brunch: process.env.BRUNCH_MENU, // Your brunch menu URL
+    tt: process.env.TACO_MENU, // Taco Tuesday URL
+    kid: process.env.KIDS_MENU,
   };
 
   const documentURL = menus[menuType] || '';
@@ -73,7 +75,8 @@ const App = () => {
         // Assuming your Netlify function is set up at this endpoint
         const response = await axios.post('/.netlify/functions/NodeMailer', formData);
         console.log('Server Response:', response.data);
-
+        setPopupMessage("Message sent!");
+        setIsOpen(true);
         // Reset form fields after successful form submission
         setFormData({
           name: '',
@@ -81,6 +84,8 @@ const App = () => {
           message: ''
         });
       } catch (error) {
+        setPopupMessage("Message failed to send. Please try again later.");
+        setIsOpen(true);
         console.error('Failed to send message:', error);
       }
     }
@@ -105,6 +110,10 @@ const App = () => {
   };
 
   useEffect(() => {
+
+    if(popupMessage == ''){
+      setIsOpen(false);
+    } else setIsOpen(true);
 
     const handleResize = () => {
       setSize({
@@ -208,9 +217,9 @@ const App = () => {
       <Parallax speed={15} opacity={[3.8, 0]}>
         <div style={{ paddingTop: '300px', marginBottom: '50vh' }} />
         <Container backgroundColor='orange'>
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center', justifyContent: 'center' }}>
             <h3>Hungry for more? Place a reservation or call us!</h3>
-            <SVGButton onClick={() => openInNewTab('https://www.foodbooking.com/ordering/restaurant/menu?restaurant_uid=26f53f2a-8d84-469d-9df9-1760d0d64bd4')} style={{ marginBottom: "50px", alignSelf: "center"}}>Click here to reserve a table</SVGButton>
+            <SVGButton onClick={() => openInNewTab('https://www.foodbooking.com/ordering/restaurant/menu?restaurant_uid=26f53f2a-8d84-469d-9df9-1760d0d64bd4')} style={{ display: "flex", justifyContent: 'center', marginBottom: "50px", }}>Click here to reserve a table</SVGButton>
             <h5>(781) 867-7997</h5>
             <h3>Follow us on our Social Media:</h3>
             <img onClick={() => openInNewTab('https://www.instagram.com/simcharestaurant/')} src={IgLogo} style={{maxWidth:'80px', marginRight: "5px"}} />

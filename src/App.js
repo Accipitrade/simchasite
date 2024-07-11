@@ -147,7 +147,7 @@ const App = () => {
       <Popup className="popup" isOpen={isOpen} setIsOpen={() => { setIsOpen(false); }}>
         <div>
           <h2>
-            Simcha will be closed tonight, Wednesday, 4/3/2024. Sorry for the inconvenience!
+            Simcha is now permanently closed. Thank you for the years of support!
           </h2>
         </div>
       </Popup>
